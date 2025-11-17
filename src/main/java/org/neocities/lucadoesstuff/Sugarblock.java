@@ -1,5 +1,8 @@
 package org.neocities.lucadoesstuff;
 
+import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
@@ -15,6 +18,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import static org.neocities.lucadoesstuff.ModBlocks.BLOCKS;
 import static org.neocities.lucadoesstuff.ModItems.ITEMS;
 import static org.neocities.lucadoesstuff.CreativeModeTabs.CREATIVE_MODE_TABS;
+import static org.neocities.lucadoesstuff.ModItems.SUGAR_BLOCK_ITEM;
 
 @Mod(Sugarblock.MODID)
 public class Sugarblock {
@@ -41,5 +45,15 @@ public class Sugarblock {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("HELLO from server starting");
+    }
+
+    @SubscribeEvent
+    public void onHorseInteract(PlayerInteractEvent.EntityInteract event) {
+        if (event.getTarget() instanceof Horse horse) {
+            if(event.getItemStack().getItem() == SUGAR_BLOCK_ITEM.get()) {
+                horse.heal(10.0f);
+                event.getItemStack().shrink(1);
+            }
+        }
     }
 }
