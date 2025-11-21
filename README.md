@@ -15,3 +15,4 @@ For Linux-based and other OSs it depends on your configuration.
 #### Mod Managers
 The mod is available on:
 - Curseforge: https://www.curseforge.com/minecraft/mc-mods/sugarblock
+- Modrinth: https://modrinth.com/mod/sugarblock
